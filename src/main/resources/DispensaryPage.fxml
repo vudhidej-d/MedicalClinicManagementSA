@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="center" hgap="10" prefHeight="800.0" prefWidth="1000.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DispensaryController">
+   <children>
+      <Pane prefHeight="800.0" prefWidth="1000.0">
+         <children>
+            <TableView layoutX="50.0" layoutY="150.0" prefHeight="600.0" prefWidth="900.0">
+              <columns>
+                <TableColumn prefWidth="100.0" text="Result ID" />
+                <TableColumn minWidth="0.0" prefWidth="0.0" text="C2" />
+                  <TableColumn minWidth="0.0" prefWidth="150.0" text="Date" />
+                  <TableColumn minWidth="0.0" prefWidth="575.0" text="Info" />
+              </columns>
+            </TableView>
+            <Button layoutX="50.0" layoutY="51.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="100.0" text="&lt;">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Button>
+            <Label layoutX="180.0" layoutY="31.0" prefHeight="100.0" prefWidth="500.0" text="Dispensary">
+               <font>
+                  <Font name="System Bold Italic" size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+</GridPane>
