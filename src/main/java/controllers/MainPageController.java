@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import models.Patient;
 
 import java.io.IOException;
 
@@ -13,6 +14,15 @@ public class MainPageController {
 
     @FXML
     private Pane mainPane;
+
+    @FXML
+    public void initialize() {
+        DBController db = new DBController();
+        db.selectPatientRecords();
+        String[] i = {"Test", "Test"};
+        db.insertPatientRecord(new Patient("5", "Test", "Test", "Test", "MALE",
+                "Test", "Test", "O", "Test", "Test", "Test", i));
+    }
 
     @FXML
     public void medicalRecordsBtnHandle() {

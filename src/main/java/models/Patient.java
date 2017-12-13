@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Patient {
     private String patientID;
-    private String NationalID;
+    private String nationalID;
     private String firstName;
     private String lastName;
     private Sex sex;
@@ -14,33 +14,92 @@ public class Patient {
     private String nationality;
     private String religion;
     private String telNumber;
-    private String[] Intolerances;
+    private String[] intolerances;
 
     private ArrayList<Result> results;
     private ArrayList<Symptom> symptoms;
 
-    public Patient(String patientID, String nationalID, String firstName, String lastName, Sex sex, String dateOfBirth,
-                   String age, BloodGroup bloodGroup, String nationality, String religion, String telNumber, String[] intolerances) {
+    public Patient(String patientID, String nationalID, String firstName, String lastName, String sex, String dateOfBirth,
+                   String age, String bloodGroup, String nationality, String religion, String telNumber, String[] intolerances) {
         this.patientID = patientID;
-        NationalID = nationalID;
+        this.nationalID = nationalID;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.sex = sex;
+        if (sex.equals("MALE")) {
+            this.sex = Sex.MALE;
+        } else {
+            this.sex = Sex.FEMALE;
+        }
         this.dateOfBirth = dateOfBirth;
         this.age = age;
-        this.bloodGroup = bloodGroup;
+        if (bloodGroup.equals("A")) {
+            this.bloodGroup = BloodGroup.A;
+        } else if (bloodGroup.equals("B")) {
+            this.bloodGroup = BloodGroup.B;
+        } else if (bloodGroup.equals("O")) {
+            this.bloodGroup = BloodGroup.O;
+        } else {
+            this.bloodGroup = BloodGroup.AB;
+        }
         this.nationality = nationality;
         this.religion = religion;
         this.telNumber = telNumber;
-        Intolerances = intolerances;
+        this.intolerances = intolerances;
     }
 
-    private enum BloodGroup {
-        A, B, O, AB
+    public String getPatientID() {
+        return patientID;
     }
 
-    private enum Sex {
-        MALE, FEMALE
+    public String getNationalID() {
+        return nationalID;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public BloodGroup getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public String getReligion() {
+        return religion;
+    }
+
+    public String getTelNumber() {
+        return telNumber;
+    }
+
+    public String[] getIntolerances() {
+        return intolerances;
+    }
+
+    public ArrayList<Result> getResults() {
+        return results;
+    }
+
+    public ArrayList<Symptom> getSymptoms() {
+        return symptoms;
+    }
 }
