@@ -12,9 +12,9 @@
 
 <GridPane alignment="center" hgap="10" prefHeight="500.0" prefWidth="650.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SymptomController">
    <children>
-      <Pane prefHeight="500.0" prefWidth="650.0">
+      <Pane fx:id="symtomPane" prefHeight="500.0" prefWidth="650.0">
          <children>
-            <Button layoutX="34.0" layoutY="44.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="100.0" text="&lt;">
+            <Button fx:id="backBtn" layoutX="34.0" layoutY="44.0" mnemonicParsing="false" onAction="#backBtnHandle" prefHeight="60.0" prefWidth="100.0" text="&lt;">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
@@ -24,7 +24,7 @@
                   <Font name="System Italic" size="17.0" />
                </font>
             </Label>
-            <Button layoutX="516.0" layoutY="448.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="SUBMIT">
+            <Button fx:id="submitBtn" layoutX="516.0" layoutY="448.0" mnemonicParsing="false" onAction="#submitBtnHandle" prefHeight="30.0" prefWidth="100.0" text="SUBMIT">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

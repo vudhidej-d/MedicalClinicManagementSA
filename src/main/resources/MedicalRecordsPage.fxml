@@ -5,14 +5,15 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<GridPane alignment="center" hgap="10" prefHeight="800.0" prefWidth="1000.0" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="controllers.MedicalRecordsController">
+<GridPane alignment="center" hgap="10" prefHeight="800.0" prefWidth="1000.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MedicalRecordsController">
    <children>
-      <Pane prefHeight="800.0" prefWidth="1000.0">
+      <Pane fx:id="medicalRecordsPane" prefHeight="800.0" prefWidth="1000.0">
          <children>
             <TableView layoutX="50.0" layoutY="144.0" prefHeight="500.0" prefWidth="900.0">
               <columns>
@@ -23,7 +24,7 @@
                   <TableColumn minWidth="0.0" prefWidth="100.0" />
               </columns>
             </TableView>
-            <Button layoutX="50.0" layoutY="51.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="100.0" text="&lt;">
+            <Button fx:id="backBtn" layoutX="50.0" layoutY="51.0" mnemonicParsing="false" onAction="#backBtnHandle" prefHeight="60.0" prefWidth="100.0" text="&lt;">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
@@ -39,12 +40,12 @@
                   <Font name="System Bold" size="23.0" />
                </font>
             </Label>
-            <Button layoutX="400.0" layoutY="713.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="&lt;">
+            <Button fx:id="searchBtn" layoutX="400.0" layoutY="713.0" mnemonicParsing="false" onAction="#searchBtnHandle" prefHeight="40.0" prefWidth="100.0" text="&lt;">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="800.0" layoutY="703.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" text="CREATE">
+            <Button fx:id="createBtn" layoutX="800.0" layoutY="703.0" mnemonicParsing="false" onAction="#createBtnHandle" prefHeight="60.0" prefWidth="150.0" text="CREATE">
                <font>
                   <Font name="System Bold" size="23.0" />
                </font>
@@ -52,4 +53,10 @@
          </children>
       </Pane>
    </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>
