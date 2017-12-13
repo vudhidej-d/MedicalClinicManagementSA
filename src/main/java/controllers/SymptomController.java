@@ -20,7 +20,7 @@ public class SymptomController {
     private Button submitBtn;
 
     @FXML
-    public void backBtnHandle() { changeScene("/PatientRecordFMRPPage.fxml", 1000, 800); }
+    public void backBtnHandle() { changeScene("/PatientRecordFMRP.fxml", 1000, 800); }
 
     @FXML
     public void submitBtnHandle()  {

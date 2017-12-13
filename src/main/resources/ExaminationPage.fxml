@@ -12,14 +12,14 @@
 
 <GridPane alignment="center" hgap="10" prefHeight="500.0" prefWidth="650.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExaminationController">
    <children>
-      <Pane prefHeight="500.0" prefWidth="650.0">
+      <Pane fx:id="examinationPane" prefHeight="500.0" prefWidth="650.0">
          <children>
             <Label layoutX="34.0" layoutY="24.0" prefHeight="50.0" prefWidth="500.0" text="*000* *Patient Name*">
                <font>
                   <Font name="System Italic" size="17.0" />
                </font>
             </Label>
-            <Button layoutX="405.0" layoutY="443.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="SUBMIT">
+            <Button fx:id="submitBtn" layoutX="405.0" layoutY="443.0" mnemonicParsing="false" onAction="#submitBtnHandle" prefHeight="30.0" prefWidth="100.0" text="SUBMIT">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -47,7 +47,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button layoutX="514.0" layoutY="443.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="CANCLE">
+            <Button fx:id="cancelBtn" layoutX="514.0" layoutY="443.0" mnemonicParsing="false" onAction="#cancelBtnHandle" prefHeight="30.0" prefWidth="100.0" text="CANCLE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

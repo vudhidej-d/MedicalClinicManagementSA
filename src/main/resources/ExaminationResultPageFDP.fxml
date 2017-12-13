@@ -10,7 +10,7 @@
 
 <GridPane alignment="center" hgap="10" prefHeight="500.0" prefWidth="650.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExaminationResultFDPController">
    <children>
-      <Pane prefHeight="500.0" prefWidth="650.0">
+      <Pane fx:id="examinationResultPane" prefHeight="500.0" prefWidth="650.0">
          <children>
             <Label layoutX="27.0" layoutY="22.0" prefHeight="50.0" prefWidth="500.0" text="*000* *Patient Name*">
                <font>
@@ -52,12 +52,12 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button layoutX="427.0" layoutY="446.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="COMPLETE">
+            <Button fx:id="completeBtn" layoutX="427.0" layoutY="446.0" mnemonicParsing="false" onAction="#completeBtnHandle" prefHeight="30.0" prefWidth="100.0" text="COMPLETE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button layoutX="534.0" layoutY="446.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="CANCLE">
+            <Button fx:id="cancelBtn" layoutX="534.0" layoutY="446.0" mnemonicParsing="false" onAction="#cancelBtnHandle" prefHeight="30.0" prefWidth="100.0" text="CANCLE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
