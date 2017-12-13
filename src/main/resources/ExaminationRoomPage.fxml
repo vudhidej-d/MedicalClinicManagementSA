@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" prefHeight="800.0" prefWidth="1000.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExaminationRoomController">
+<GridPane alignment="center" hgap="10" prefHeight="800.0" prefWidth="1000.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExaminationRoomController">
    <children>
-      <Pane prefHeight="800.0" prefWidth="1000.0">
+      <Pane fx:id="examinationRoomPane" prefHeight="800.0" prefWidth="1000.0">
          <children>
             <TableView layoutX="50.0" layoutY="150.0" prefHeight="600.0" prefWidth="900.0">
               <columns>
@@ -22,7 +22,7 @@
                   <TableColumn minWidth="0.0" prefWidth="450.0" text="Symptom" />
               </columns>
             </TableView>
-            <Button layoutX="50.0" layoutY="51.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="100.0" text="&lt;">
+            <Button layoutX="50.0" layoutY="51.0" mnemonicParsing="false" onAction="#backBtnHandle" prefHeight="60.0" prefWidth="100.0" text="&lt;">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
