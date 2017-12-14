@@ -37,6 +37,4 @@ public class ExaminationResultFDPController {
             e.printStackTrace();
         }
     }
-
-
 }

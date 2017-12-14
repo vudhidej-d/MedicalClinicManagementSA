@@ -3,7 +3,8 @@ package models;
 import java.util.ArrayList;
 
 public class Patient {
-    private String patientID;
+    public static int currentID;
+    private int patientID;
     private String nationalID;
     private String firstName;
     private String lastName;
@@ -19,7 +20,36 @@ public class Patient {
     private ArrayList<Result> results;
     private ArrayList<Symptom> symptoms;
 
-    public Patient(String patientID, String nationalID, String firstName, String lastName, String sex, String dateOfBirth,
+    public Patient(String nationalID, String firstName, String lastName, String sex, String dateOfBirth,
+                   String age, String bloodGroup, String nationality, String religion, String telNumber, String[] intolerances) {
+        this.patientID = currentID;
+        this.nationalID = nationalID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        if (sex.equalsIgnoreCase("MALE")) {
+            this.sex = Sex.MALE;
+        } else {
+            this.sex = Sex.FEMALE;
+        }
+        this.dateOfBirth = dateOfBirth;
+        this.age = age;
+        if (bloodGroup.equalsIgnoreCase("A")) {
+            this.bloodGroup = BloodGroup.A;
+        } else if (bloodGroup.equalsIgnoreCase("B")) {
+            this.bloodGroup = BloodGroup.B;
+        } else if (bloodGroup.equalsIgnoreCase("O")) {
+            this.bloodGroup = BloodGroup.O;
+        } else {
+            this.bloodGroup = BloodGroup.AB;
+        }
+        this.nationality = nationality;
+        this.religion = religion;
+        this.telNumber = telNumber;
+        this.intolerances = intolerances;
+        currentID++;
+    }
+
+    public Patient(int patientID, String nationalID, String firstName, String lastName, String sex, String dateOfBirth,
                    String age, String bloodGroup, String nationality, String religion, String telNumber, String[] intolerances) {
         this.patientID = patientID;
         this.nationalID = nationalID;
@@ -47,7 +77,7 @@ public class Patient {
         this.intolerances = intolerances;
     }
 
-    public String getPatientID() {
+    public int getPatientID() {
         return patientID;
     }
 

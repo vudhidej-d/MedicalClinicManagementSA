@@ -54,6 +54,4 @@ public class PatientRecordFMRPController {
             e.printStackTrace();
         }
     }
-
-
 }

@@ -12,16 +12,14 @@ import java.io.IOException;
 
 public class MainPageController {
 
+    DBController db = new DBController();
+
     @FXML
     private Pane mainPane;
 
     @FXML
     public void initialize() {
-        DBController db = new DBController();
-        db.selectPatientRecords();
-        String[] i = {"Test", "Test"};
-        db.insertPatientRecord(new Patient("5", "Test", "Test", "Test", "MALE",
-                "Test", "Test", "O", "Test", "Test", "Test", i));
+        Patient.currentID = db.getLastID("Patient")+1;
     }
 
     @FXML

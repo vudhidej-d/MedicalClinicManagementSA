@@ -37,5 +37,4 @@ public class PatientRecordFERPController {
             e.printStackTrace();
         }
     }
-
 }

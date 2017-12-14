@@ -20,6 +20,25 @@ public class DBController {
         return connection;
     }
 
+    public int getLastID(String table) {
+        int id = 0;
+        try {
+            Connection connection = connect();
+            if (connection != null) {
+                String query = "select max("+table+"ID) from "+table;
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+
+                id = resultSet.getInt(1);
+
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
     public ArrayList<Patient> selectPatientRecords() {
         ArrayList<Patient> patientRecords = new ArrayList<Patient>();
         try {
@@ -32,7 +51,7 @@ public class DBController {
                 System.out.println("Select successful!");
 
                 while (resultSet.next()) {
-                    String patientID = resultSet.getString(1);
+                    int patientID = resultSet.getInt(1);
                     String nationalID = resultSet.getString(2);
                     String firstName = resultSet.getString(3);
                     String lastName = resultSet.getString(4);
@@ -87,5 +106,4 @@ public class DBController {
             e.printStackTrace();
         }
     }
-
 }
