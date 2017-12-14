@@ -8,6 +8,7 @@ public class Patient {
     private String nationalID;
     private String firstName;
     private String lastName;
+    private String fullName;
     private Sex sex;
     private String dateOfBirth;
     private String age;
@@ -26,6 +27,7 @@ public class Patient {
         this.nationalID = nationalID;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.fullName = firstName+" "+lastName;
         if (sex.equalsIgnoreCase("MALE")) {
             this.sex = Sex.MALE;
         } else {
@@ -55,6 +57,7 @@ public class Patient {
         this.nationalID = nationalID;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.fullName = firstName+" "+lastName;
         if (sex.equals("MALE")) {
             this.sex = Sex.MALE;
         } else {
@@ -91,6 +94,10 @@ public class Patient {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getFullName() {
+        return fullName;
     }
 
     public Sex getSex() {
