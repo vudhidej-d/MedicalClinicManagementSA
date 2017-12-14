@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -33,6 +34,8 @@ public class MedicalRecordsController {
     @FXML
     private TableColumn<Patient, String> nameColumn, telColumn;
     @FXML
+    private TextField searchTF;
+    @FXML
     private Button backBtn;
     @FXML
     private Button createBtn;
@@ -41,17 +44,8 @@ public class MedicalRecordsController {
 
     @FXML
     public void initialize() {
-        ObservableList<Patient> list = FXCollections.observableArrayList();
         patientRecords = db.selectPatientRecords();
-        for (int i = 0; i < patientRecords.size(); i++) {
-            list.add(patientRecords.get(i));
-            System.out.println(patientRecords.get(i).getFullName());
-        }
-        patientIDColumn.setCellValueFactory(new PropertyValueFactory<Patient, Integer>("patientID"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("fullName"));
-        telColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("telNumber"));
-
-        medicalRecordsTable.setItems(list);
+        updateTable();
     }
 
     @FXML
@@ -61,7 +55,13 @@ public class MedicalRecordsController {
 
     @FXML
     public void searchBtnHandle() {
-
+        String name = searchTF.getText();
+        if (name.equals("")) {
+            patientRecords = db.selectPatientRecords();
+        } else {
+            patientRecords = db.searchPatient(name);
+        }
+        updateTable();
     }
 
     @FXML
@@ -78,5 +78,19 @@ public class MedicalRecordsController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateTable() {
+        ObservableList<Patient> list = FXCollections.observableArrayList();
+//        patientRecords = db.selectPatientRecords();
+        for (int i = 0; i < patientRecords.size(); i++) {
+            list.add(patientRecords.get(i));
+            System.out.println(patientRecords.get(i).getFullName());
+        }
+        patientIDColumn.setCellValueFactory(new PropertyValueFactory<Patient, Integer>("patientID"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("fullName"));
+        telColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("telNumber"));
+
+        medicalRecordsTable.setItems(list);
     }
 }
