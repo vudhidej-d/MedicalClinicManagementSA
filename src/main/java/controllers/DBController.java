@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Patient;
+import models.Result;
 import models.Symptom;
 
 import java.sql.*;
@@ -225,7 +226,7 @@ public class DBController {
         try {
             Connection connection = connect();
             if (connection != null) {
-                String query = "Select * from Symptom where PatientID = '"+pID+"'";
+                String query = "select * from Symptom where PatientID = '"+pID+"';";
                 System.out.println(query);
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
@@ -257,6 +258,56 @@ public class DBController {
                         "'"+symptom.getSymptomInfo()+"',"+
                         "'"+symptom.getPatientID()+"',"+
                         "'"+symptom.getStaffID()+"')";
+                System.out.println(query);
+                Statement statement = connection.createStatement();
+                statement.executeUpdate(query);
+                System.out.println("Insert successful!");
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<Result> selectResults(int pID) {
+        ArrayList<Result> results = new ArrayList<Result>();
+        try {
+            Connection connection = connect();
+            if (connection != null) {
+                String query = "select * from Result where PatientID = '"+pID+"';";
+                System.out.println(query);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                System.out.println("Select successful!");
+
+                while (resultSet.next()) {
+                    int resultID = resultSet.getInt(1);
+                    String noteDate = resultSet.getString(2);
+                    String resultInfo = resultSet.getString(3);
+                    String prescription = resultSet.getString(4);
+                    int staffID = resultSet.getInt(5);
+                    int medicID = resultSet.getInt(6);
+                    results.add(new Result(resultID, noteDate, resultInfo, prescription, staffID, medicID));
+                }
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+    public void insertResult(Result result) {
+        try {
+            Connection connection = connect();
+            if (connection != null) {
+                String query = "insert into Result (ResultID, NoteDate, ResultInfo, PatientID, StaffID) values (" +
+                        "'"+result.getResultID()+"',"+
+                        "'"+result.getNoteDate()+"',"+
+                        "'"+result.getResultInfo()+"',"+
+                        "'"+result.getPrescription()+"',"+
+                        "'"+result.getPatientID()+"'," +
+                        "'"+result.getMedicID()+"')";
                 System.out.println(query);
                 Statement statement = connection.createStatement();
                 statement.executeUpdate(query);
