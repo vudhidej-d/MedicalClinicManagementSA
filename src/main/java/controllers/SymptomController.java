@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +18,8 @@ import models.Symptom;
 import java.io.IOException;
 
 public class SymptomController {
+
+    private DBController db = new DBController();
 
     @FXML
     private Pane symtomPane;
@@ -36,6 +39,16 @@ public class SymptomController {
     private Label patientLabel;
 
     private Patient patient;
+
+    @FXML
+    public void initialize() {
+        Platform.runLater(new Runnable() {
+            public void run() {
+                patientLabel.setText(patient.getPatientID() + ": " + patient.getFullName());
+            }
+        });
+    }
+
 
     public void setPatient(Patient patient) {
         this.patient = patient;
@@ -57,11 +70,11 @@ public class SymptomController {
 
     @FXML
     public void submitBtnHandle()  {
-//        patient.addSymptom(new Symptom(dateField.getText(), infoField.getText(), patient.getPatientID(), staffIDField.getText()));
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExaminationRoomPage.fxml"));
-//        ExaminationRoomController controller = loader.getController();
-//        controller.addPatient(patient);
-//        changeScene("/MedicalRecordsPage.fxml", 1000, 800);
+        Symptom symptom = new Symptom(dateField.getText(), infoField.getText(), patient.getPatientID(), Integer.parseInt(staffIDField.getText()));
+        db.insertSymptom(symptom);
+        db.updateStatus(roomField.getText(), patient.getPatientID());
+        patient.addSymptom(symptom);
+        changeScene("/MedicalRecordsPage.fxml", 1000, 800);
     }
 
     public void changeScene(String scene, int w, int h) {

@@ -17,6 +17,7 @@ public class Patient {
     private String religion;
     private String telNumber;
     private String[] intolerances;
+    private String currentSymptom;
 
     private ArrayList<Result> results = new ArrayList<Result>();
     private ArrayList<Symptom> symptoms = new ArrayList<Symptom>();
@@ -80,8 +81,21 @@ public class Patient {
         this.intolerances = intolerances;
     }
 
+    public void setCurrentSymptom() {
+        System.out.println(symptoms.size());
+        currentSymptom = symptoms.get(symptoms.size() - 1).getSymptomInfo();
+    }
+
+    public void setSymptoms(ArrayList<Symptom> symptoms) {
+        this.symptoms = symptoms;
+    }
+
     public void addSymptom(Symptom symptom) {
         symptoms.add(symptom);
+    }
+
+    public String getCurrentSymptom() {
+        return currentSymptom;
     }
 
     public int getPatientID() {

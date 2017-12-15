@@ -236,7 +236,7 @@ public class DBController {
                     String noteDate = resultSet.getString(2);
                     String symptomInfo = resultSet.getString(3);
                     int patientID = resultSet.getInt(4);
-                    String staffID = resultSet.getString(5);
+                    int staffID = resultSet.getInt(5);
                     symptoms.add(new Symptom(symptomID, noteDate, symptomInfo, patientID, staffID));
                 }
                 connection.close();

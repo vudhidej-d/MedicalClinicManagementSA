@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" prefHeight="500.0" prefWidth="600.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainPageController">
+<GridPane alignment="center" hgap="10" prefHeight="500.0" prefWidth="600.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainPageController">
    <children>
       <Pane fx:id="mainPane" prefHeight="500.0" prefWidth="600.0">
          <children>
@@ -22,7 +22,7 @@
                   <Font name="System Bold Italic" size="31.0" />
                </font>
             </Label>
-            <TextField layoutX="419.0" layoutY="266.0" prefHeight="75.0" prefWidth="81.0" promptText="0">
+            <TextField fx:id="roomNumField" layoutX="419.0" layoutY="266.0" prefHeight="75.0" prefWidth="81.0" promptText="0">
                <font>
                   <Font size="30.0" />
                </font></TextField>

@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import models.Patient;
@@ -19,6 +20,9 @@ public class MainPageController {
     private Pane mainPane;
 
     @FXML
+    private TextField roomNumField;
+
+    @FXML
     public void initialize() {
         Patient.currentID = db.getLastID("Patient")+1;
         Symptom.currentID = db.getLastID("Symptom")+1;
@@ -31,7 +35,19 @@ public class MainPageController {
 
     @FXML
     public void examinationRoomBtnHandle() {
-        changeScene("/ExaminationRoomPage.fxml", 1000, 800);
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExaminationRoomPage.fxml"));
+//        changeScene("/ExaminationRoomPage.fxml", 1000, 800);
+        Stage stage = (Stage) mainPane.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExaminationRoomPage.fxml"));
+        try {
+            stage.setScene(new Scene((Parent) loader.load(),1000, 800));
+            ExaminationRoomController controller = loader.getController();
+            System.out.println(roomNumField.getText());
+            controller.setRoomNum(roomNumField.getText());
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
