@@ -38,7 +38,7 @@ public class ExaminationRoomController {
     @FXML
     private TableColumn<Patient, String> currentSymptomColumn;
 
-    private String roomNum;
+    public static String roomNum;
 
     @FXML
     public void initialize() {
@@ -98,7 +98,7 @@ public class ExaminationRoomController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/PatientRecordPageFERP.fxml"));
         try {
             stage.setScene(new Scene((Parent) loader.load(),1000, 800));
-            PatientRecordFMRPController controller = loader.getController();
+            PatientRecordFERPController controller = loader.getController();
             controller.setPatient(patientRecords.get(allPatients.indexOf(patientSelected.get(0))));
             stage.show();
         } catch (IOException e) {

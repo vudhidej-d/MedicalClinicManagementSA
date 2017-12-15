@@ -14,9 +14,9 @@
    <children>
       <Pane fx:id="examinationPane" prefHeight="500.0" prefWidth="650.0">
          <children>
-            <Label layoutX="34.0" layoutY="24.0" prefHeight="50.0" prefWidth="500.0" text="*000* *Patient Name*">
+            <Label fx:id="patientLabel" layoutX="34.0" layoutY="24.0" prefHeight="50.0" prefWidth="500.0" text="*000* *Patient Name*">
                <font>
-                  <Font name="System Italic" size="17.0" />
+                  <Font name="System Bold" size="17.0" />
                </font>
             </Label>
             <Button fx:id="submitBtn" layoutX="405.0" layoutY="443.0" mnemonicParsing="false" onAction="#submitBtnHandle" prefHeight="30.0" prefWidth="100.0" text="SUBMIT">
@@ -39,9 +39,9 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="84.0" layoutY="123.0" prefHeight="50.0" prefWidth="125.0" promptText="26/11/2017" />
-            <TextArea layoutX="84.0" layoutY="186.0" prefHeight="150.0" prefWidth="532.0" />
-            <TextArea layoutX="96.0" layoutY="352.0" prefHeight="75.0" prefWidth="520.0" />
+            <TextField fx:id="dateField" layoutX="84.0" layoutY="123.0" prefHeight="50.0" prefWidth="125.0" promptText="26/11/2017" />
+            <TextArea fx:id="infoArea" layoutX="84.0" layoutY="186.0" prefHeight="150.0" prefWidth="532.0" />
+            <TextArea fx:id="prescriptionArea" layoutX="96.0" layoutY="352.0" prefHeight="75.0" prefWidth="520.0" />
             <Label layoutX="14.0" layoutY="352.0" prefHeight="40.0" prefWidth="84.0" text="Prescription:">
                <font>
                   <Font size="14.0" />

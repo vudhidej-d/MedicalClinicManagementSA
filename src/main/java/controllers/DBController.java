@@ -301,7 +301,7 @@ public class DBController {
         try {
             Connection connection = connect();
             if (connection != null) {
-                String query = "insert into Result (ResultID, NoteDate, ResultInfo, PatientID, StaffID) values (" +
+                String query = "insert into Result (ResultID, NoteDate, ResultInfo, Prescription, PatientID, MedicID) values (" +
                         "'"+result.getResultID()+"',"+
                         "'"+result.getNoteDate()+"',"+
                         "'"+result.getResultInfo()+"',"+
@@ -333,4 +333,24 @@ public class DBController {
             e.printStackTrace();
         }
     }
+
+    public int selectMedicID(int roomNum) {
+        int medicID = 0;
+        try {
+            Connection connection = connect();
+            if (connection != null) {
+                String query = "select MedicID from Medic where RoomNumber = '"+roomNum+"';";
+                System.out.println(query);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                medicID = resultSet.getInt(1);
+                System.out.println("Select successful!!!");
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return medicID;
+    }
+
 }
