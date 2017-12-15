@@ -76,6 +76,41 @@ public class DBController {
         return patientRecords;
     }
 
+    public ArrayList<Patient> selectPatientRecords(String status) {
+        ArrayList<Patient> patientRecords = new ArrayList<Patient>();
+        try {
+            Connection connection = connect();
+            if (connection != null) {
+                String query = "Select * from Patient where Status = '"+status+"'";
+                System.out.println(query);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                System.out.println("Select successful!");
+
+                while (resultSet.next()) {
+                    int patientID = resultSet.getInt(1);
+                    String nationalID = resultSet.getString(2);
+                    String firstName = resultSet.getString(3);
+                    String lastName = resultSet.getString(4);
+                    String sex = resultSet.getString(5);
+                    String dateOfBirth = resultSet.getString(6);
+                    String age = resultSet.getString(7);
+                    String bloodGroup = resultSet.getString(8);
+                    String nationality = resultSet.getString(9);
+                    String religion = resultSet.getString(10);
+                    String telNumber = resultSet.getString(11);
+                    String[] intolerances = resultSet.getString(12).split("\n");
+                    patientRecords.add(new Patient(patientID, nationalID, firstName, lastName, sex, dateOfBirth,
+                            age, bloodGroup, nationality, religion, telNumber, intolerances));
+                }
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return patientRecords;
+    }
+
     public Patient selectPatientRecord(int key) {
         Patient patient = null;
         try {
@@ -185,14 +220,62 @@ public class DBController {
         return patientRecords;
     }
 
+    public ArrayList<Symptom> selectSymptoms(int pID) {
+        ArrayList<Symptom> symptoms = new ArrayList<Symptom>();
+        try {
+            Connection connection = connect();
+            if (connection != null) {
+                String query = "Select * from Symptom where PatientID = '"+pID+"'";
+                System.out.println(query);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                System.out.println("Select successful!");
+
+                while (resultSet.next()) {
+                    int symptomID = resultSet.getInt(1);
+                    String noteDate = resultSet.getString(2);
+                    String symptomInfo = resultSet.getString(3);
+                    int patientID = resultSet.getInt(4);
+                    String staffID = resultSet.getString(5);
+                    symptoms.add(new Symptom(symptomID, noteDate, symptomInfo, patientID, staffID));
+                }
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return symptoms;
+    }
+
+    public void insertSymptom(Symptom symptom) {
+        try {
+            Connection connection = connect();
+            if (connection != null) {
+                String query = "insert into Symptom (SymptomID, NoteDate, SymptomInfo, PatientID, StaffID) values (" +
+                        "'"+symptom.getSymptomID()+"',"+
+                        "'"+symptom.getNoteDate()+"',"+
+                        "'"+symptom.getSymptomInfo()+"',"+
+                        "'"+symptom.getPatientID()+"',"+
+                        "'"+symptom.getStaffID()+"')";
+                System.out.println(query);
+                Statement statement = connection.createStatement();
+                statement.executeUpdate(query);
+                System.out.println("Insert successful!");
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void updateStatus(String status, int key) {
         try {
             Connection connection = connect();
             if (connection != null) {
-                String query = "update Patient set Status = '"+status+"' where PatientID = '"+key+"'";
+                String query = "update Patient set Status = '"+status+"' where PatientID = '"+key+"';";
                 System.out.println(query);
                 Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(query);
+                statement.execute(query);
                 System.out.println("Update successful!");
             }
         } catch (SQLException e) {

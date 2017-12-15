@@ -24,4 +24,24 @@ public class Symptom {
         this.patientID = patientID;
         this.staffID = staffID;
     }
+
+    public int getSymptomID() {
+        return symptomID;
+    }
+
+    public String getNoteDate() {
+        return noteDate;
+    }
+
+    public String getSymptomInfo() {
+        return symptomInfo;
+    }
+
+    public int getPatientID() {
+        return patientID;
+    }
+
+    public String getStaffID() {
+        return staffID;
+    }
 }
