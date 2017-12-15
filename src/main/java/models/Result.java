@@ -1,14 +1,14 @@
 package models;
 
 public class Result {
-    private String resultID;
+    private int resultID;
     private String noteDate;
-    private String resultInfo;
+    private int resultInfo;
     private String prescription;
-    private String patientID;
-    private String medicID;
+    private int patientID;
+    private int medicID;
 
-    public Result(String resultID, String noteDate, String resultInfo, String prescription, String patientID, String medicID) {
+    public Result(int resultID, String noteDate, int resultInfo, String prescription, int patientID, int medicID) {
         this.resultID = resultID;
         this.noteDate = noteDate;
         this.resultInfo = resultInfo;

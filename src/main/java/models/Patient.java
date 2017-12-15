@@ -18,8 +18,8 @@ public class Patient {
     private String telNumber;
     private String[] intolerances;
 
-    private ArrayList<Result> results;
-    private ArrayList<Symptom> symptoms;
+    private ArrayList<Result> results = new ArrayList<Result>();
+    private ArrayList<Symptom> symptoms = new ArrayList<Symptom>();
 
     public Patient(String nationalID, String firstName, String lastName, String sex, String dateOfBirth,
                    String age, String bloodGroup, String nationality, String religion, String telNumber, String[] intolerances) {
@@ -78,6 +78,10 @@ public class Patient {
         this.religion = religion;
         this.telNumber = telNumber;
         this.intolerances = intolerances;
+    }
+
+    public void addSymptom(Symptom symptom) {
+        symptoms.add(symptom);
     }
 
     public int getPatientID() {

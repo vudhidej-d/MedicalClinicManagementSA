@@ -3,7 +3,7 @@ package models;
 import java.util.ArrayList;
 
 public class Staff {
-    private String staffID;
+    private int staffID;
     private String firstName;
     private String lastName;
     private Role role;
@@ -13,7 +13,7 @@ public class Staff {
 
     private ArrayList<Symptom> symptoms;
 
-    public Staff(String staffID, String firstName, String lastName, Role role, String dateOfBirth, String age, String telNumber) {
+    public Staff(int staffID, String firstName, String lastName, Role role, String dateOfBirth, String age, String telNumber) {
         this.staffID = staffID;
         this.firstName = firstName;
         this.lastName = lastName;

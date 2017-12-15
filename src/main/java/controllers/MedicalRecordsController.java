@@ -1,7 +1,9 @@
 package controllers;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,8 +13,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Patient;
 
@@ -46,6 +48,12 @@ public class MedicalRecordsController {
     public void initialize() {
         patientRecords = db.selectPatientRecords();
         updateTable();
+
+        medicalRecordsTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                onClickedPatientRecord();
+            }
+        });
     }
 
     @FXML
@@ -93,4 +101,21 @@ public class MedicalRecordsController {
 
         medicalRecordsTable.setItems(list);
     }
+
+    private void onClickedPatientRecord() {
+        ObservableList<Patient> patientSelected, allPatients;
+        allPatients = medicalRecordsTable.getItems();
+        patientSelected = medicalRecordsTable.getSelectionModel().getSelectedItems();
+        Stage stage = (Stage) medicalRecordsPane.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/PatientRecordPageFMRP.fxml"));
+        try {
+            stage.setScene(new Scene((Parent) loader.load(),1000, 800));
+            PatientRecordFMRPController controller = loader.getController();
+            controller.setPatient(patientRecords.get(allPatients.indexOf(patientSelected.get(0))));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

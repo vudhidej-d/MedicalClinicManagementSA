@@ -1,6 +1,8 @@
 package controllers;
 
 import models.Patient;
+import models.Symptom;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -116,7 +118,7 @@ public class DBController {
                     intolerances += "\\n"+patient.getIntolerances()[i];
                 }
                 String query = "insert into Patient (PatientID, NationalID, FirstName, LastName, Sex, DateOfBirth," +
-                        "Age, BloodGroup, Nationality, Religion, TelNumber, Intolerances) values (" +
+                        "Age, BloodGroup, Nationality, Religion, TelNumber, Intolerances, Status) values (" +
                         "'"+patient.getPatientID()+"',"+
                         "'"+patient.getNationalID()+"',"+
                         "'"+patient.getFirstName()+"',"+
@@ -128,7 +130,8 @@ public class DBController {
                         "'"+patient.getNationality()+"',"+
                         "'"+patient.getReligion()+"',"+
                         "'"+patient.getTelNumber()+"',"+
-                        "'"+intolerances+"')";
+                        "'"+intolerances+"',"+
+                        "'STANDBY')";
                 System.out.println(query);
                 Statement statement = connection.createStatement();
                 statement.executeUpdate(query);
@@ -180,5 +183,20 @@ public class DBController {
             e.printStackTrace();
         }
         return patientRecords;
+    }
+
+    public void updateStatus(String status, int key) {
+        try {
+            Connection connection = connect();
+            if (connection != null) {
+                String query = "update Patient set Status = '"+status+"' where PatientID = '"+key+"'";
+                System.out.println(query);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                System.out.println("Update successful!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

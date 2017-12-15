@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import models.Patient;
 
 import java.io.IOException;
 
@@ -13,6 +14,10 @@ public class ExaminationRoomController {
 
     @FXML
     private Pane examinationRoomPane;
+
+    public void addPatient(Patient patient) {
+
+    }
 
     @FXML
     public void backBtnHandle() {
