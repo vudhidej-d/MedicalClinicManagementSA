@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -19,8 +20,11 @@ import models.Patient;
 import models.Result;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class PatientRecordFMRPController {
+
+    private DBController db = new DBController();
 
     @FXML
     private Pane patientRecordFMRPPane;
@@ -40,6 +44,7 @@ public class PatientRecordFMRPController {
     private Label patientLabel;
 
     private Patient patient;
+    private ArrayList<Result> results;
 
     @FXML
     public void initialize() {
@@ -47,13 +52,19 @@ public class PatientRecordFMRPController {
             public void run() {
                 patientLabel.setText(patient.getPatientID() + ": " +  patient.getFullName());
                 ObservableList<Result> list = FXCollections.observableArrayList();
-                for (Result result: patient.getResults()) {
-                    list.add(result);
+                results = db.selectResults(patient.getPatientID());
+                for (int i = results.size() - 1; i >= 0; i--) {
+                    list.add(results.get(i));
                 }
                 resultIDColumn.setCellValueFactory(new PropertyValueFactory<Result, Integer>("resultID"));
                 dateColumn.setCellValueFactory(new PropertyValueFactory<Result, String>("noteDate"));
                 infoColumn.setCellValueFactory(new PropertyValueFactory<Result, String>("resultInfo"));
                 resultTable.setItems(list);
+            }
+        });
+        resultTable.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                onClickedResultRecord();
             }
         });
     }
@@ -69,19 +80,6 @@ public class PatientRecordFMRPController {
 
     @FXML
     public void examBtnHandle()  {
-//        Stage stage = new Stage();
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SymptomPage.fxml"));
-//        try {
-//            stage.initOwner(patientRecordFMRPPane.getScene().getWindow());
-//            stage.setScene(new Scene((Parent) loader.load()));
-//            stage.setTitle("Symptom Page");
-//            stage.initModality(Modality.WINDOW_MODAL);
-//            stage.showAndWait();
-//        }
-//        catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
         Stage stage = (Stage) patientRecordFMRPPane.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/SymptomPage.fxml"));
         try {
@@ -105,4 +103,30 @@ public class PatientRecordFMRPController {
             e.printStackTrace();
         }
     }
+
+    private void onClickedResultRecord() {
+        ObservableList<Result> resultSelected, allResults;
+        allResults = resultTable.getItems();
+        resultSelected = resultTable.getSelectionModel().getSelectedItems();
+        popUp(patient, results.get(allResults.indexOf(resultSelected.get(0))));
+    }
+
+    private void popUp(Patient patient, Result result) {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExaminationResultPageFERP.fxml"));
+        try {
+            stage.setScene(new Scene((Parent) loader.load()));
+            ExaminationResultFERPController controller = loader.getController();
+            controller.setResult(patient, result);
+            stage.initOwner(patientRecordFMRPPane.getScene().getWindow());
+            stage.setTitle("Examination Result");
+            stage.initModality(Modality.NONE);
+            stage.showAndWait();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
