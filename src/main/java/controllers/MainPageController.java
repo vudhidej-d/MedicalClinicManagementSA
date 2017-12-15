@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import models.Patient;
+import models.Result;
 import models.Symptom;
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class MainPageController {
     public void initialize() {
         Patient.currentID = db.getLastID("Patient")+1;
         Symptom.currentID = db.getLastID("Symptom")+1;
+        Result.currentID = db.getLastID("Result")+1;
     }
 
     @FXML
