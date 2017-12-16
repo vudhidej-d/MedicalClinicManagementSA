@@ -109,10 +109,12 @@ public class MedicalRecordsController {
         Stage stage = (Stage) medicalRecordsPane.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/PatientRecordPageFMRP.fxml"));
         try {
-            stage.setScene(new Scene((Parent) loader.load(),1000, 800));
-            PatientRecordFMRPController controller = loader.getController();
-            controller.setPatient(patientRecords.get(allPatients.indexOf(patientSelected.get(0))));
-            stage.show();
+            if(!patientSelected.isEmpty()) {
+                stage.setScene(new Scene((Parent) loader.load(), 1000, 800));
+                PatientRecordFMRPController controller = loader.getController();
+                controller.setPatient(patientRecords.get(allPatients.indexOf(patientSelected.get(0))));
+                stage.show();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

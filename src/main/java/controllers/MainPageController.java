@@ -44,7 +44,7 @@ public class MainPageController {
         try {
             stage.setScene(new Scene((Parent) loader.load(),1000, 800));
             ExaminationRoomController controller = loader.getController();
-            System.out.println(roomNumField.getText());
+//            System.out.println(roomNumField.getText());
             controller.setRoomNum(roomNumField.getText());
             stage.show();
         } catch (IOException e) {
@@ -56,6 +56,7 @@ public class MainPageController {
     public void dispensaryBtnHandle() {
         changeScene("/DispensaryPage.fxml", 1000, 800);
     }
+
 
     public void changeScene(String scene, int w, int h) {
         Stage stage = (Stage) mainPane.getScene().getWindow();

@@ -1,5 +1,7 @@
 package models;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 import java.util.ArrayList;
 
 public class Patient {
@@ -18,6 +20,21 @@ public class Patient {
     private String telNumber;
     private String[] intolerances;
     private String currentSymptom;
+    private int currentResultID;
+    private String currentResultInfo;
+    private String currentResultDate;
+
+    public int getCurrentResultID() {
+        return currentResultID;
+    }
+
+    public String getCurrentResultInfo() {
+        return currentResultInfo;
+    }
+
+    public String getCurrentResultDate() {
+        return currentResultDate;
+    }
 
     private ArrayList<Result> results = new ArrayList<Result>();
     private ArrayList<Symptom> symptoms = new ArrayList<Symptom>();
@@ -150,11 +167,18 @@ public class Patient {
         return intolerances;
     }
 
+    public void setResult(ArrayList<Result> results){
+        this.results=results;
+        this.currentResultID=results.get(results.size()-1).getResultID();
+        this.currentResultInfo=results.get(results.size()-1).getResultInfo();
+        this.currentResultDate=results.get(results.size()-1).getNoteDate();
+
+    }
     public ArrayList<Result> getResults() {
         return results;
     }
 
-    public ArrayList<Symptom> getSymptoms() {
-        return symptoms;
-    }
+    public ArrayList<Symptom> getSymptoms() { return symptoms; }
+
+
 }
