@@ -1,9 +1,12 @@
 package controllers;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -11,6 +14,8 @@ import javafx.stage.Stage;
 import models.Patient;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class CreateMedicalRecordController {
 
@@ -23,13 +28,13 @@ public class CreateMedicalRecordController {
     @FXML
     private TextField lastNameTF;
     @FXML
-    private TextField sexTF;
+    private ComboBox<String> sexCB;
     @FXML
-    private TextField dateOfBirthTF;
+    private DatePicker dateOfBirthDP;
     @FXML
     private TextField ageTF;
     @FXML
-    private TextField bloodGroupTF;
+    private ComboBox<String> bloodGroupCB;
     @FXML
     private TextField nationalityTF;
     @FXML
@@ -42,6 +47,13 @@ public class CreateMedicalRecordController {
     private Pane createMedicalRecordPane;
 
     @FXML
+    public void initialize() {
+        dateOfBirthDP.setValue(LocalDate.now());
+        sexCB.setItems(FXCollections.observableArrayList("MALE", "FEMALE"));
+        bloodGroupCB.setItems(FXCollections.observableArrayList("A", "B", "O", "AB"));
+    }
+
+    @FXML
     public void cancelBtnHandle() {
         changeScene("/MedicalRecordsPage.fxml", 1000, 800);
     }
@@ -51,19 +63,28 @@ public class CreateMedicalRecordController {
         String nationalID = nationalIDTF.getText();
         String firstName = firstNameTF.getText();
         String lastName = lastNameTF.getText();
-        String sex = sexTF.getText().toUpperCase();
+        String sex = sexCB.getValue();
         System.out.println(sex);
-        String dateOfBirth = dateOfBirthTF.getText();
+        String dateOfBirth = dateOfBirthDP.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        System.out.println(dateOfBirth);
         String age = ageTF.getText();
-        String bloodGroup = bloodGroupTF.getText().toUpperCase();
+        String bloodGroup = bloodGroupCB.getValue();
         System.out.println(bloodGroup);
-        String nationality = nationalIDTF.getText();
+        String nationality = nationalityTF.getText();
         String religion = religionTF.getText();
         String telNumber = telTF.getText();
         String[] intolerances = intoleranceTF.getText().split("\n");
-        db.insertPatientRecord(new Patient(nationalID, firstName, lastName, sex, dateOfBirth, age, bloodGroup,
-                nationality, religion, telNumber, intolerances));
-        changeScene("/MedicalRecordsPage.fxml", 1000, 800);
+        boolean isNotNull = nationalID != null && firstName != null && lastName != null && sex != null &&
+                dateOfBirth != null && age != null && bloodGroup != null && nationality != null &&
+                religion != null && telNumber != null && intolerances != null;
+        boolean isNumeric = nationalID.matches("[-+]?\\d*\\.?\\d+") &&
+                age.matches("[-+]?\\d*\\.?\\d+") &&
+                telNumber.matches("[-+]?\\d*\\.?\\d+");
+        if (isNotNull && isNumeric) {
+            db.insertPatientRecord(new Patient(nationalID, firstName, lastName, sex, dateOfBirth, age, bloodGroup,
+                    nationality, religion, telNumber, intolerances));
+            changeScene("/MedicalRecordsPage.fxml", 1000, 800);
+        }
     }
 
     public void changeScene(String scene, int w, int h) {
