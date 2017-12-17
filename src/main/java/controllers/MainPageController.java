@@ -36,16 +36,29 @@ public class MainPageController {
 
     @FXML
     public void examinationRoomBtnHandle() {
-        Stage stage = (Stage) mainPane.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExaminationRoomPage.fxml"));
-        try {
-            stage.setScene(new Scene((Parent) loader.load(),1000, 800));
-            ExaminationRoomController controller = loader.getController();
-            controller.setRoomNum(roomNumField.getText());
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (check()) {
+            Stage stage = (Stage) mainPane.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExaminationRoomPage.fxml"));
+            try {
+                stage.setScene(new Scene((Parent) loader.load(), 1000, 800));
+                ExaminationRoomController controller = loader.getController();
+                controller.setRoomNum(roomNumField.getText());
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    private boolean check() {
+        if (!roomNumField.getText().isEmpty()) {
+            for (int i: db.selectAllRoomNumber()) {
+                if (i == Integer.parseInt(roomNumField.getText())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @FXML

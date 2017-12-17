@@ -14,7 +14,7 @@
    <children>
       <Pane fx:id="patientRecordFMRPPane" prefHeight="800.0" prefWidth="1000.0">
          <children>
-            <TableView fx:id="resultTable" layoutX="50.0" layoutY="453.0" prefHeight="224.0" prefWidth="900.0">
+            <TableView fx:id="resultTable" layoutX="50.0" layoutY="476.0" prefHeight="224.0" prefWidth="900.0">
               <columns>
                 <TableColumn fx:id="resultIDColumn" editable="false" prefWidth="100.0" sortType="DESCENDING" sortable="false" text="Result ID" />
                 <TableColumn minWidth="0.0" prefWidth="0.0" text="C2" />
@@ -32,16 +32,110 @@
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <Button fx:id="examBtn" layoutX="800.0" layoutY="703.0" mnemonicParsing="false" onAction="#examBtnHandle" prefHeight="60.0" prefWidth="150.0" text="EXAM">
+            <Button fx:id="examBtn" layoutX="800.0" layoutY="726.0" mnemonicParsing="false" onAction="#examBtnHandle" prefHeight="60.0" prefWidth="150.0" text="EXAM">
                <font>
                   <Font name="System Bold" size="23.0" />
                </font>
             </Button>
-            <Label layoutX="50.0" layoutY="400.0" prefHeight="50.0" prefWidth="225.0" text="Examination Results">
+            <Label layoutX="50.0" layoutY="423.0" prefHeight="50.0" prefWidth="225.0" text="Examination Results">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
             </Label>
+            <Pane fx:id="createMedicalRecordPane" layoutX="163.0" layoutY="111.0" prefHeight="320.0" prefWidth="700.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" layoutY="140.0" prefHeight="50.0" prefWidth="150.0" text="Nationality:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="282.0" layoutY="140.0" prefHeight="50.0" prefWidth="100.0" text="Religion:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutY="-2.0" prefHeight="50.0" prefWidth="150.0" text="Date of Brith:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="296.0" layoutY="-2.0" prefHeight="50.0" prefWidth="50.0" text="Age:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="292.0" layoutY="68.0" prefHeight="50.0" prefWidth="50.0" text="Sex:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutY="68.0" prefHeight="50.0" prefWidth="150.0" text="Blood Group:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="437.0" layoutY="68.0" prefHeight="50.0" prefWidth="50.0" text="Tel:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutY="200.0" prefHeight="50.0" prefWidth="150.0" text="Intolerance:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="dobLabel" layoutX="157.0" prefHeight="50.0" prefWidth="150.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nationLabel" layoutX="157.0" layoutY="140.0" prefHeight="50.0" prefWidth="150.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="intoleLabel" alignment="TOP_LEFT" layoutX="157.0" layoutY="210.0" prefHeight="100.0" prefWidth="500.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="religionLabel" layoutX="393.0" layoutY="140.0" prefHeight="50.0" prefWidth="150.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="telLabel" layoutX="497.0" layoutY="68.0" prefHeight="50.0" prefWidth="150.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="sexLabel" layoutX="352.0" layoutY="70.0" prefHeight="50.0" prefWidth="90.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="ageLabel" layoutX="350.0" layoutY="-2.0" prefHeight="50.0" prefWidth="80.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="bgLabel" layoutX="157.0" layoutY="70.0" prefHeight="50.0" prefWidth="80.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="447.0" layoutY="-2.0" prefHeight="50.0" prefWidth="100.0" text="National ID:">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nationIDLabel" layoutX="552.0" layoutY="-3.0" prefHeight="50.0" prefWidth="150.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>

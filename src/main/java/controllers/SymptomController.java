@@ -24,6 +24,10 @@ public class SymptomController {
     @FXML
     private Pane symtomPane;
     @FXML
+    private Button cancelBtn;
+    @FXML
+    private Button submitBtn;
+    @FXML
     private DatePicker datePicker;
     @FXML
     private TextArea infoField;
@@ -45,7 +49,7 @@ public class SymptomController {
     }
 
     @FXML
-    public void backBtnHandle() {
+    public void cancelBtnHandle() {
         Stage stage = (Stage) symtomPane.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/PatientRecordPageFMRP.fxml"));
         try {
@@ -75,7 +79,7 @@ public class SymptomController {
             int staffID = Integer.parseInt(staffIDField.getText());
             boolean result1 = false;
             boolean result2 = false;
-            for (int i: db.selectRoomNumbers()) {
+            for (int i: db.selectAllRoomNumber()) {
                 if (roomNum == i) {
                     result1 = true;
                     break;
@@ -88,7 +92,6 @@ public class SymptomController {
                 }
             }
             return result1 && result2;
-
         }
         return false;
     }

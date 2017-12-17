@@ -6,6 +6,7 @@ import models.Symptom;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class DBController {
 
@@ -42,6 +43,50 @@ public class DBController {
         return id;
     }
 
+    public HashSet<Integer> selectAllRoomNumber() {
+        HashSet<Integer> allRoomNumbers = new HashSet<>();
+        try {
+            Connection connection = connect();
+            if (connection != null) {
+                String query = "select RoomNumber from Medic";
+                System.out.println(query);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                System.out.println("Select successful!!!");
+                while (resultSet.next()) {
+                    int roomNumber = resultSet.getInt(1);
+                    allRoomNumbers.add(roomNumber);
+                }
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allRoomNumbers;
+    }
+
+    public ArrayList<Integer> selectAllStaffID() {
+        ArrayList<Integer> allID = new ArrayList<>();
+        try {
+            Connection connection = connect();
+            if (connection != null) {
+                String query = "select StaffID from Staff";
+                System.out.println(query);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                System.out.println("Select successful!!!");
+                while (resultSet.next()) {
+                    int id = resultSet.getInt(1);
+                    allID.add(id);
+                }
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allID;
+    }
+
     public ArrayList<Patient> selectPatientRecords() {
         ArrayList<Patient> patientRecords = new ArrayList<Patient>();
         try {
@@ -65,7 +110,7 @@ public class DBController {
                     String nationality = resultSet.getString(9);
                     String religion = resultSet.getString(10);
                     String telNumber = resultSet.getString(11);
-                    String[] intolerances = resultSet.getString(12).split("\n");
+                    String[] intolerances = resultSet.getString(12).split("\\n");
                     patientRecords.add(new Patient(patientID, nationalID, firstName, lastName, sex, dateOfBirth,
                             age, bloodGroup, nationality, religion, telNumber, intolerances));
                 }

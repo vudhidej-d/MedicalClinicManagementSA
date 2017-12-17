@@ -19,6 +19,7 @@ import models.Patient;
 import models.Result;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PatientRecordFMRPController {
@@ -37,21 +38,31 @@ public class PatientRecordFMRPController {
     private TableColumn<Result, String> dateColumn, infoColumn;
     @FXML
     private Label patientLabel;
+    @FXML
+    private Label dobLabel;
+    @FXML
+    private Label ageLabel;
+    @FXML
+    private Label nationIDLabel;
+    @FXML
+    private Label bgLabel;
+    @FXML
+    private Label sexLabel;
+    @FXML
+    private Label telLabel;
+    @FXML
+    private Label nationLabel;
+    @FXML
+    private Label religionLabel;
+    @FXML
+    private Label intoleLabel;
 
     @FXML
     public void initialize() {
         Platform.runLater(new Runnable() {
             public void run() {
-                patientLabel.setText(patient.getPatientID() + ": " +  patient.getFullName());
-                ObservableList<Result> list = FXCollections.observableArrayList();
-                results = db.selectResults(patient.getPatientID());
-                for (int i = results.size() - 1; i >= 0; i--) {
-                    list.add(results.get(i));
-                }
-                resultIDColumn.setCellValueFactory(new PropertyValueFactory<Result, Integer>("resultID"));
-                dateColumn.setCellValueFactory(new PropertyValueFactory<Result, String>("noteDate"));
-                infoColumn.setCellValueFactory(new PropertyValueFactory<Result, String>("resultInfo"));
-                resultTable.setItems(list);
+                setLabel();
+                updateTable();
             }
         });
         resultTable.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
@@ -59,6 +70,28 @@ public class PatientRecordFMRPController {
                 onClickedResultRecord();
             }
         });
+    }
+
+    @FXML
+    private void setLabel() {
+        patientLabel.setText(patient.getPatientID() + ": " +  patient.getFullName());
+        dobLabel.setText(patient.getDateOfBirth());
+        ageLabel.setText(patient.getAge());
+        nationIDLabel.setText(patient.getNationalID());
+        bgLabel.setText(patient.getBloodGroup().toString());
+        sexLabel.setText(patient.getSex().toString());
+        telLabel.setText(patient.getTelNumber());
+        nationLabel.setText(patient.getNationality());
+        religionLabel.setText(patient.getReligion());
+        String tmp = "";
+        String[] intolerances = patient.getIntolerances();
+        for (int i = 0; i < intolerances.length; i++) {
+            tmp += intolerances[i];
+            if (i < intolerances.length - 1) {
+                tmp += ", ";
+            }
+        }
+        intoleLabel.setText(tmp);
     }
 
     public void setPatient(Patient patient) {
@@ -99,7 +132,9 @@ public class PatientRecordFMRPController {
         ObservableList<Result> resultSelected, allResults;
         allResults = resultTable.getItems();
         resultSelected = resultTable.getSelectionModel().getSelectedItems();
-        popUp(patient, results.get(allResults.indexOf(resultSelected.get(0))));
+        if (resultSelected.size() > 0) {
+            popUp(patient, results.get(allResults.indexOf(resultSelected.get(0))));
+        }
     }
 
     private void popUp(Patient patient, Result result) {
@@ -118,4 +153,17 @@ public class PatientRecordFMRPController {
             e.printStackTrace();
         }
     }
+
+    private void updateTable() {
+        ObservableList<Result> list = FXCollections.observableArrayList();
+        results = db.selectResults(patient.getPatientID());
+        for (int i = results.size() - 1; i >= 0; i--) {
+            list.add(results.get(i));
+        }
+        resultIDColumn.setCellValueFactory(new PropertyValueFactory<Result, Integer>("resultID"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<Result, String>("noteDate"));
+        infoColumn.setCellValueFactory(new PropertyValueFactory<Result, String>("resultInfo"));
+        resultTable.setItems(list);
+    }
+
 }

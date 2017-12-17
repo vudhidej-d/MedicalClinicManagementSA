@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" prefHeight="500.0" prefWidth="650.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExaminationResultFDPController">
+<GridPane alignment="center" hgap="10" prefHeight="500.0" prefWidth="650.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExaminationResultFDPController">
    <children>
       <Pane fx:id="examinationResultPane" prefHeight="500.0" prefWidth="650.0">
          <children>
@@ -22,34 +22,34 @@
                   <Font name="System Italic" size="32.0" />
                </font>
             </Label>
-            <Label layoutX="34.0" layoutY="106.0" prefHeight="40.0" prefWidth="50.0" text="Date:">
+            <Label layoutX="34.0" layoutY="106.0" prefHeight="50.0" prefWidth="50.0" text="Date:">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="34.0" layoutY="164.0" prefHeight="40.0" prefWidth="50.0" text="Info:">
+            <Label layoutX="34.0" layoutY="160.0" prefHeight="50.0" prefWidth="50.0" text="Info:">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="335.0" prefHeight="40.0" prefWidth="84.0" text="Prescription:">
+            <Label layoutX="14.0" layoutY="327.0" prefHeight="50.0" prefWidth="120.0" text="Prescription:">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="dateLabel" layoutX="84.0" layoutY="106.0" prefHeight="40.0" prefWidth="100.0">
+            <Label fx:id="dateLabel" layoutX="98.0" layoutY="106.0" prefHeight="50.0" prefWidth="150.0">
                <font>
-                  <Font size="14.0" />
+                  <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="infoLabel" alignment="TOP_LEFT" layoutX="84.0" layoutY="175.0" prefHeight="159.0" prefWidth="548.0">
+            <Label fx:id="infoLabel" alignment="TOP_LEFT" layoutX="98.0" layoutY="171.0" prefHeight="159.0" prefWidth="548.0">
                <font>
-                  <Font size="14.0" />
+                  <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="prescriptionLabel" alignment="TOP_LEFT" layoutX="98.0" layoutY="344.0" prefHeight="90.0" prefWidth="536.0">
+            <Label fx:id="prescriptionLabel" alignment="TOP_LEFT" layoutX="134.0" layoutY="340.0" prefHeight="90.0" prefWidth="500.0">
                <font>
-                  <Font size="14.0" />
+                  <Font size="18.0" />
                </font>
             </Label>
             <Button layoutX="427.0" layoutY="446.0" mnemonicParsing="false" onAction="#completeBtnHandle" prefHeight="30.0" prefWidth="100.0" text="COMPLETE">

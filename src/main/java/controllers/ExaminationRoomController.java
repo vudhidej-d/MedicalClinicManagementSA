@@ -90,15 +90,17 @@ public class ExaminationRoomController {
         ObservableList<Patient> patientSelected, allPatients;
         allPatients = examinationRoomTable.getItems();
         patientSelected = examinationRoomTable.getSelectionModel().getSelectedItems();
-        Stage stage = (Stage) examinationRoomPane.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/PatientRecordPageFERP.fxml"));
-        try {
-            stage.setScene(new Scene((Parent) loader.load(),1000, 800));
-            PatientRecordFERPController controller = loader.getController();
-            controller.setPatient(patientRecords.get(allPatients.indexOf(patientSelected.get(0))));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (patientSelected.size() > 0) {
+            Stage stage = (Stage) examinationRoomPane.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/PatientRecordPageFERP.fxml"));
+            try {
+                stage.setScene(new Scene((Parent) loader.load(), 1000, 800));
+                PatientRecordFERPController controller = loader.getController();
+                controller.setPatient(patientRecords.get(allPatients.indexOf(patientSelected.get(0))));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -14,6 +15,8 @@ import models.Patient;
 import models.Result;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ExaminationController {
 
@@ -25,7 +28,7 @@ public class ExaminationController {
     @FXML
     private Label patientLabel;
     @FXML
-    private TextField dateField;
+    private DatePicker datePicker;
     @FXML
     private TextArea infoArea;
     @FXML
@@ -35,6 +38,7 @@ public class ExaminationController {
     public void initialize() {
         Platform.runLater(new Runnable() {
             public void run() {
+                datePicker.setValue(LocalDate.now());
                 patientLabel.setText(patient.getPatientID() + ": " + patient.getFullName());
             }
         });
@@ -56,9 +60,18 @@ public class ExaminationController {
 
     @FXML
     public void submitBtnHandle()  {
-        db.insertResult(new Result(dateField.getText(), infoArea.getText(), prescriptionArea.getText(), patient.getPatientID(), db.selectMedicID(Integer.parseInt(ExaminationRoomController.roomNum))));
-        db.updateStatus("DISPENSARY", patient.getPatientID());
-        changeScene("/ExaminationRoomPage.fxml", 1000, 800);
+        if (check()) {
+            db.insertResult(new Result(datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yy")), infoArea.getText(), prescriptionArea.getText(), patient.getPatientID(), db.selectMedicID(Integer.parseInt(ExaminationRoomController.roomNum))));
+            db.updateStatus("DISPENSARY", patient.getPatientID());
+            changeScene("/ExaminationRoomPage.fxml", 1000, 800);
+        }
+    }
+
+    private boolean check() {
+        if (datePicker.getValue() != null && !infoArea.getText().isEmpty() && !prescriptionArea.getText().isEmpty()) {
+            return true;
+        }
+        return false;
     }
 
     public void changeScene(String scene, int w, int h) {
@@ -75,4 +88,5 @@ public class ExaminationController {
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
+
 }
