@@ -80,7 +80,7 @@ public class CreateMedicalRecordController {
         boolean isNumeric = nationalID.matches("[-+]?\\d*\\.?\\d+") &&
                 age.matches("[-+]?\\d*\\.?\\d+") &&
                 telNumber.matches("[-+]?\\d*\\.?\\d+");
-        if (isNotNull && isNumeric) {
+        if (isNotNull && isNumeric && nationalID.length() == 13 && (telNumber.length() == 10 || telNumber.length() == 9)) {
             db.insertPatientRecord(new Patient(nationalID, firstName, lastName, sex, dateOfBirth, age, bloodGroup,
                     nationality, religion, telNumber, intolerances));
             changeScene("/MedicalRecordsPage.fxml", 1000, 800);
