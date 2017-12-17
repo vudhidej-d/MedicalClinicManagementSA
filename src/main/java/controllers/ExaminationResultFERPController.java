@@ -6,8 +6,6 @@ import javafx.scene.control.Label;
 import models.Patient;
 import models.Result;
 
-import java.awt.*;
-
 public class ExaminationResultFERPController {
 
     private Result result;
@@ -33,11 +31,6 @@ public class ExaminationResultFERPController {
         });
     }
 
-    public void setResult(Patient patient, Result result) {
-        this.patient = patient;
-        this.result = result;
-    }
-
     @FXML
     private void display() {
         patientLabel.setText(patient.getPatientID() + ": " + patient.getFullName());
@@ -47,4 +40,8 @@ public class ExaminationResultFERPController {
         prescriptionLabel.setText(result.getPrescription());
     }
 
+    public void setResult(Patient patient, Result result) {
+        this.patient = patient;
+        this.result = result;
+    }
 }

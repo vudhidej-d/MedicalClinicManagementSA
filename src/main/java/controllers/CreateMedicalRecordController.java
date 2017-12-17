@@ -4,49 +4,42 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import models.BloodGroup;
 import models.Patient;
-import models.Sex;
 
 import java.io.IOException;
 
 public class CreateMedicalRecordController {
 
-    DBController db = new DBController();
+    private DBController db = new DBController();
 
     @FXML
-    TextField nationalIDTF;
+    private TextField nationalIDTF;
     @FXML
-    TextField firstNameTF;
+    private TextField firstNameTF;
     @FXML
-    TextField lastNameTF;
+    private TextField lastNameTF;
     @FXML
-    TextField sexTF;
+    private TextField sexTF;
     @FXML
-    TextField dateOfBirthTF;
+    private TextField dateOfBirthTF;
     @FXML
-    TextField ageTF;
+    private TextField ageTF;
     @FXML
-    TextField bloodGroupTF;
+    private TextField bloodGroupTF;
     @FXML
-    TextField nationalityTF;
+    private TextField nationalityTF;
     @FXML
-    TextField religionTF;
+    private TextField religionTF;
     @FXML
-    TextField telTF;
+    private TextField telTF;
     @FXML
-    TextArea intoleranceTF;
+    private TextArea intoleranceTF;
     @FXML
     private Pane createMedicalRecordPane;
-//    @FXML
-//    private Button submitBtn;
-//    @FXML
-//    private Button cancelBtn;
 
     @FXML
     public void cancelBtnHandle() {

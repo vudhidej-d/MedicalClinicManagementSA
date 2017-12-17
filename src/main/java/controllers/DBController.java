@@ -47,7 +47,7 @@ public class DBController {
         try {
             Connection connection = connect();
             if (connection != null) {
-                String query = "Select * from Patient";
+                String query = "select * from Patient";
                 System.out.println(query);
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
@@ -82,7 +82,7 @@ public class DBController {
         try {
             Connection connection = connect();
             if (connection != null) {
-                String query = "Select * from Patient where Status = '"+status+"'";
+                String query = "select * from Patient where Status = '"+status+"'";
                 System.out.println(query);
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
@@ -110,39 +110,6 @@ public class DBController {
             e.printStackTrace();
         }
         return patientRecords;
-    }
-
-    public Patient selectPatientRecord(int key) {
-        Patient patient = null;
-        try {
-            Connection connection = connect();
-            if (connection != null) {
-                String query = "Select * from Patient where PatientID = '"+key+"';";
-                System.out.println(query);
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(query);
-                System.out.println("Select successful!");
-
-                int patientID = resultSet.getInt(1);
-                String nationalID = resultSet.getString(2);
-                String firstName = resultSet.getString(3);
-                String lastName = resultSet.getString(4);
-                String sex = resultSet.getString(5);
-                String dateOfBirth = resultSet.getString(6);
-                String age = resultSet.getString(7);
-                String bloodGroup = resultSet.getString(8);
-                String nationality = resultSet.getString(9);
-                String religion = resultSet.getString(10);
-                String telNumber = resultSet.getString(11);
-                String[] intolerances = resultSet.getString(12).split("\n");
-                patient = new Patient(patientID, nationalID, firstName, lastName, sex, dateOfBirth,
-                        age, bloodGroup, nationality, religion, telNumber, intolerances);
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return patient;
     }
 
     public void insertPatientRecord(Patient patient) {
@@ -187,9 +154,9 @@ public class DBController {
                 String query = "";
                 String[] search = name.split(" ");
                 if (search.length == 1) {
-                    query = "Select * from Patient where FirstName like '%"+search[0]+"%' or LastName like '%"+search[0]+"%'";
+                    query = "select * from Patient where FirstName like '%"+search[0]+"%' or LastName like '%"+search[0]+"%'";
                 } else {
-                    query = "Select * from Patient where FirstName like '%"+search[0]+"%' or LastName like '%"+search[1]+"%'";
+                    query = "select * from Patient where FirstName like '%"+search[0]+"%' or LastName like '%"+search[1]+"%'";
                 }
 
                 System.out.println(query);
@@ -328,6 +295,7 @@ public class DBController {
                 Statement statement = connection.createStatement();
                 statement.execute(query);
                 System.out.println("Update successful!");
+                connection.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -352,5 +320,4 @@ public class DBController {
         }
         return medicID;
     }
-
 }

@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ExaminationRoomController {
+    public static String roomNum;
 
     private DBController db = new DBController();
     private ArrayList<Patient> patientRecords = new ArrayList<Patient>();
@@ -38,8 +39,6 @@ public class ExaminationRoomController {
     @FXML
     private TableColumn<Patient, String> currentSymptomColumn;
 
-    public static String roomNum;
-
     @FXML
     public void initialize() {
         Platform.runLater(new Runnable() {
@@ -54,8 +53,6 @@ public class ExaminationRoomController {
             }
         });
     }
-
-    public void setRoomNum(String roomNum) { this.roomNum = roomNum; }
 
     @FXML
     public void backBtnHandle() {
@@ -86,7 +83,6 @@ public class ExaminationRoomController {
         patientIDColumn.setCellValueFactory(new PropertyValueFactory<Patient, Integer>("patientID"));
         fullNameColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("fullName"));
         currentSymptomColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("currentSymptom"));
-
         examinationRoomTable.setItems(list);
     }
 
@@ -106,4 +102,7 @@ public class ExaminationRoomController {
         }
     }
 
+    public void setRoomNum(String roomNum) {
+        this.roomNum = roomNum;
+    }
 }

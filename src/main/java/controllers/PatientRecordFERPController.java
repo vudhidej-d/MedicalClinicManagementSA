@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -19,33 +18,25 @@ import javafx.stage.Stage;
 import models.Patient;
 import models.Result;
 
-import java.beans.EventHandler;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class PatientRecordFERPController {
 
     private DBController db = new DBController();
+    private Patient patient;
+    private ArrayList<Result> results;
 
     @FXML
     private Pane patientRecordFERPPane;
-    @FXML
-    private Button backBtn;
-    @FXML
-    private Button createBtn;
-
     @FXML
     private TableView<Result> resultTable;
     @FXML
     private TableColumn<Result, Integer> resultIDColumn;
     @FXML
     private TableColumn<Result, String> dateColumn, infoColumn;
-
     @FXML
     private Label patientLabel;
-
-    private Patient patient;
-    private ArrayList<Result> results;
 
     @FXML
     public void initialize() {
@@ -121,5 +112,4 @@ public class PatientRecordFERPController {
             e.printStackTrace();
         }
     }
-
 }

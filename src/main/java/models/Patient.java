@@ -1,7 +1,5 @@
 package models;
 
-import com.sun.org.apache.regexp.internal.RE;
-
 import java.util.ArrayList;
 
 public class Patient {
@@ -23,18 +21,6 @@ public class Patient {
     private int currentResultID;
     private String currentResultInfo;
     private String currentResultDate;
-
-    public int getCurrentResultID() {
-        return currentResultID;
-    }
-
-    public String getCurrentResultInfo() {
-        return currentResultInfo;
-    }
-
-    public String getCurrentResultDate() {
-        return currentResultDate;
-    }
 
     private ArrayList<Result> results = new ArrayList<Result>();
     private ArrayList<Symptom> symptoms = new ArrayList<Symptom>();
@@ -99,8 +85,19 @@ public class Patient {
     }
 
     public void setCurrentSymptom() {
-        System.out.println(symptoms.size());
         currentSymptom = symptoms.get(symptoms.size() - 1).getSymptomInfo();
+    }
+
+    public int getCurrentResultID() {
+        return currentResultID;
+    }
+
+    public String getCurrentResultInfo() {
+        return currentResultInfo;
+    }
+
+    public String getCurrentResultDate() {
+        return currentResultDate;
     }
 
     public void setSymptoms(ArrayList<Symptom> symptoms) {
@@ -172,13 +169,13 @@ public class Patient {
         this.currentResultID=results.get(results.size()-1).getResultID();
         this.currentResultInfo=results.get(results.size()-1).getResultInfo();
         this.currentResultDate=results.get(results.size()-1).getNoteDate();
-
     }
+
     public ArrayList<Result> getResults() {
         return results;
     }
 
-    public ArrayList<Symptom> getSymptoms() { return symptoms; }
-
-
+    public ArrayList<Symptom> getSymptoms() {
+        return symptoms;
+    }
 }

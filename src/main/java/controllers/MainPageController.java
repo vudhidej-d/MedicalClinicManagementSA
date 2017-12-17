@@ -15,11 +15,10 @@ import java.io.IOException;
 
 public class MainPageController {
 
-    DBController db = new DBController();
+    private DBController db = new DBController();
 
     @FXML
     private Pane mainPane;
-
     @FXML
     private TextField roomNumField;
 
@@ -37,14 +36,11 @@ public class MainPageController {
 
     @FXML
     public void examinationRoomBtnHandle() {
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExaminationRoomPage.fxml"));
-//        changeScene("/ExaminationRoomPage.fxml", 1000, 800);
         Stage stage = (Stage) mainPane.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExaminationRoomPage.fxml"));
         try {
             stage.setScene(new Scene((Parent) loader.load(),1000, 800));
             ExaminationRoomController controller = loader.getController();
-//            System.out.println(roomNumField.getText());
             controller.setRoomNum(roomNumField.getText());
             stage.show();
         } catch (IOException e) {
@@ -56,7 +52,6 @@ public class MainPageController {
     public void dispensaryBtnHandle() {
         changeScene("/DispensaryPage.fxml", 1000, 800);
     }
-
 
     public void changeScene(String scene, int w, int h) {
         Stage stage = (Stage) mainPane.getScene().getWindow();

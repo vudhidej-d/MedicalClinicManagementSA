@@ -20,13 +20,10 @@ import java.io.IOException;
 public class SymptomController {
 
     private DBController db = new DBController();
+    private Patient patient;
 
     @FXML
     private Pane symtomPane;
-    @FXML
-    private Button backBtn;
-    @FXML
-    private Button submitBtn;
     @FXML
     private TextField dateField;
     @FXML
@@ -38,8 +35,6 @@ public class SymptomController {
     @FXML
     private Label patientLabel;
 
-    private Patient patient;
-
     @FXML
     public void initialize() {
         Platform.runLater(new Runnable() {
@@ -47,11 +42,6 @@ public class SymptomController {
                 patientLabel.setText(patient.getPatientID() + ": " + patient.getFullName());
             }
         });
-    }
-
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
     }
 
     @FXML
@@ -86,5 +76,9 @@ public class SymptomController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }

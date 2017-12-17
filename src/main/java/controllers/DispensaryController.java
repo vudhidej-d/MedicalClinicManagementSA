@@ -20,29 +20,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class DispensaryController {
-//
-//    public static void main(String[] args) {
-//        ArrayList<String> str = new ArrayList<String>();
-//        str.add("a");
-//        str.add("b");
-//        System.out.println(str.get(-1));
-//    }
+
     private DBController db = new DBController();
     private ArrayList<Patient> patientRecords = new ArrayList<Patient>();
 
     @FXML
     private TableColumn<Patient, Integer> resultIDColumn,patientIDColumn;
-
     @FXML
     private TableColumn<Patient, String> dateColumn, infoColumn,patientNameColumn;
-
     @FXML
     private Pane dispensaryPane;
-
     @FXML
     private TableView<Patient> dispensaryTable;
-
-
 
     @FXML
     public void initialize(){
@@ -53,11 +42,11 @@ public class DispensaryController {
                 onClickedPatientRecord();
             }
         });
-
     }
 
-
-    public void backBttHandle(){changeScene("/MainPage.fxml",600,500);}
+    public void backBttHandle(){
+        changeScene("/MainPage.fxml",600,500);
+    }
 
     private void onClickedPatientRecord() {
         ObservableList<Patient> patientSelected, allPatients;
@@ -67,7 +56,7 @@ public class DispensaryController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExaminationResultPageFDP.fxml"));
         try {
             if(!patientSelected.isEmpty()) {
-                stage.setScene(new Scene((Parent) loader.load(), 1000, 800));
+                stage.setScene(new Scene((Parent) loader.load(), 650, 500));
                 ExaminationResultFDPController controller = loader.getController();
                 controller.setPatient(patientRecords.get(allPatients.indexOf(patientSelected.get(0))));
 
@@ -80,25 +69,19 @@ public class DispensaryController {
 
     public void updateTable() {
         ObservableList<Patient> list = FXCollections.observableArrayList();
-//        patientRecords = db.selectPatientRecords();
         for (int i = 0; i < patientRecords.size(); i++) {
-
             ArrayList<Result> results =db.selectResults(patientRecords.get(i).getPatientID());
             patientRecords.get(i).setResult(results);
             list.add(patientRecords.get(i));
-
-//            System.out.println(patientRecords.get(i).getFullName());
-
         }
         patientIDColumn.setCellValueFactory(new PropertyValueFactory<Patient, Integer>("patientID"));
-
         patientNameColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("fullName"));
         infoColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("currentResultInfo"));
         resultIDColumn.setCellValueFactory(new PropertyValueFactory<Patient, Integer>("currentResultID"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("currentResultDate"));
-
         dispensaryTable.setItems(list);
     }
+
     public void changeScene(String scene, int w, int h) {
         Stage stage = (Stage) dispensaryPane.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(scene));

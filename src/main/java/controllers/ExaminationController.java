@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -19,13 +18,10 @@ import java.io.IOException;
 public class ExaminationController {
 
     private DBController db = new DBController();
+    private Patient patient;
 
     @FXML
     private Pane examinationPane;
-    @FXML
-    private Button cancelBtn;
-    @FXML
-    private Button submitBtn;
     @FXML
     private Label patientLabel;
     @FXML
@@ -35,10 +31,6 @@ public class ExaminationController {
     @FXML
     private TextArea prescriptionArea;
 
-
-
-    private Patient patient;
-
     @FXML
     public void initialize() {
         Platform.runLater(new Runnable() {
@@ -46,10 +38,6 @@ public class ExaminationController {
                 patientLabel.setText(patient.getPatientID() + ": " + patient.getFullName());
             }
         });
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
     }
 
     @FXML
@@ -84,4 +72,7 @@ public class ExaminationController {
         }
     }
 
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
 }
