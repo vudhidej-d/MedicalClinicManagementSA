@@ -5,10 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -16,6 +13,8 @@ import models.Patient;
 import models.Symptom;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class SymptomController {
 
@@ -25,7 +24,7 @@ public class SymptomController {
     @FXML
     private Pane symtomPane;
     @FXML
-    private TextField dateField;
+    private DatePicker datePicker;
     @FXML
     private TextArea infoField;
     @FXML
@@ -39,6 +38,7 @@ public class SymptomController {
     public void initialize() {
         Platform.runLater(new Runnable() {
             public void run() {
+                datePicker.setValue(LocalDate.now());
                 patientLabel.setText(patient.getPatientID() + ": " + patient.getFullName());
             }
         });
@@ -60,11 +60,41 @@ public class SymptomController {
 
     @FXML
     public void submitBtnHandle()  {
-        Symptom symptom = new Symptom(dateField.getText(), infoField.getText(), patient.getPatientID(), Integer.parseInt(staffIDField.getText()));
-        db.insertSymptom(symptom);
-        db.updateStatus(roomField.getText(), patient.getPatientID());
-        patient.addSymptom(symptom);
-        changeScene("/MedicalRecordsPage.fxml", 1000, 800);
+        if (check()) {
+            Symptom symptom = new Symptom(datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yy")), infoField.getText(), patient.getPatientID(), Integer.parseInt(staffIDField.getText()));
+            db.insertSymptom(symptom);
+            db.updateStatus(roomField.getText(), patient.getPatientID());
+            patient.addSymptom(symptom);
+            changeScene("/MedicalRecordsPage.fxml", 1000, 800);
+        }
+    }
+
+    private boolean check() {
+        if (datePicker.getValue() != null && !infoField.getText().isEmpty() && isNumeric(staffIDField.getText()) && isNumeric(roomField.getText())) {
+            int roomNum = Integer.parseInt(roomField.getText());
+            int staffID = Integer.parseInt(staffIDField.getText());
+            boolean result1 = false;
+            boolean result2 = false;
+            for (int i: db.selectRoomNumbers()) {
+                if (roomNum == i) {
+                    result1 = true;
+                    break;
+                }
+            }
+            for (int j: db.selectAllStaffID()) {
+                if (staffID == j) {
+                    result2 = true;
+                    break;
+                }
+            }
+            return result1 && result2;
+
+        }
+        return false;
+    }
+
+    private boolean isNumeric(String s) {
+        return s != null && s.matches("[-+]?\\d*\\.?\\d+");
     }
 
     public void changeScene(String scene, int w, int h) {
