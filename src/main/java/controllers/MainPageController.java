@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Patient;
 import models.Result;
@@ -47,6 +48,24 @@ public class MainPageController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            alert("ไม่มีห้องหมายเลข "+roomNumField.getText()+" อยู่");
+        }
+    }
+
+    @FXML
+    public void dispensaryBtnHandle() {
+        changeScene("/DispensaryPage.fxml", 1000, 800);
+    }
+
+    public void changeScene(String scene, int w, int h) {
+        Stage stage = (Stage) mainPane.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(scene));
+        try {
+            stage.setScene(new Scene((Parent) loader.load(),w, h));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -61,17 +80,19 @@ public class MainPageController {
         return false;
     }
 
-    @FXML
-    public void dispensaryBtnHandle() {
-        changeScene("/DispensaryPage.fxml", 1000, 800);
-    }
-
-    public void changeScene(String scene, int w, int h) {
-        Stage stage = (Stage) mainPane.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(scene));
+    public void alert(String message) {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AlertPopup.fxml"));
         try {
-            stage.setScene(new Scene((Parent) loader.load(),w, h));
-            stage.show();
+            stage.initOwner(mainPane.getScene().getWindow());
+            stage.setScene(new Scene((Parent) loader.load()));
+            stage.setTitle("Alert!");
+            stage.initModality(Modality.WINDOW_MODAL);
+
+            AlertController controller = loader.getController();
+            controller.setStage(stage);
+            controller.getPopupLabel().setText(message);
+            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }

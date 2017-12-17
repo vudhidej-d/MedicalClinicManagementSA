@@ -10,6 +10,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Patient;
 
@@ -77,13 +78,16 @@ public class CreateMedicalRecordController {
         boolean isNotNull = nationalID != null && firstName != null && lastName != null && sex != null &&
                 dateOfBirth != null && age != null && bloodGroup != null && nationality != null &&
                 religion != null && telNumber != null && intolerances != null;
-        boolean isNumeric = nationalID.matches("[-+]?\\d*\\.?\\d+") &&
-                age.matches("[-+]?\\d*\\.?\\d+") &&
-                telNumber.matches("[-+]?\\d*\\.?\\d+");
+        boolean isNumeric = nationalID.matches("[+]?\\d*\\.?\\d+") &&
+                age.matches("[+]?\\d*\\.?\\d+") &&
+                telNumber.matches("[+]?\\d*\\.?\\d+");
         if (isNotNull && isNumeric && nationalID.length() == 13 && (telNumber.length() == 10 || telNumber.length() == 9)) {
             db.insertPatientRecord(new Patient(nationalID, firstName, lastName, sex, dateOfBirth, age, bloodGroup,
                     nationality, religion, telNumber, intolerances));
+            alert("สร้างระเบียนประวัติผู้ป่วยเรียบร้อย");
             changeScene("/MedicalRecordsPage.fxml", 1000, 800);
+        } else {
+            alert("ข้อมูลไม่สมบูรณ์");
         }
     }
 
@@ -93,6 +97,24 @@ public class CreateMedicalRecordController {
         try {
             stage.setScene(new Scene((Parent) loader.load(),w, h));
             stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void alert(String message) {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AlertPopup.fxml"));
+        try {
+            stage.initOwner(createMedicalRecordPane.getScene().getWindow());
+            stage.setScene(new Scene((Parent) loader.load()));
+            stage.setTitle("Alert!");
+            stage.initModality(Modality.WINDOW_MODAL);
+
+            AlertController controller = loader.getController();
+            controller.setStage(stage);
+            controller.getPopupLabel().setText(message);
+            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }

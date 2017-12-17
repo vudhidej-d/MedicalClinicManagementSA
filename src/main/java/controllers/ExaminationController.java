@@ -8,8 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Patient;
 import models.Result;
@@ -63,7 +63,10 @@ public class ExaminationController {
         if (check()) {
             db.insertResult(new Result(datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yy")), infoArea.getText(), prescriptionArea.getText(), patient.getPatientID(), db.selectMedicID(Integer.parseInt(ExaminationRoomController.roomNum))));
             db.updateStatus("DISPENSARY", patient.getPatientID());
+            alert("บันทึกผลการตรวจเรียบร้อย");
             changeScene("/ExaminationRoomPage.fxml", 1000, 800);
+        } else {
+            alert("ข้อมูลไม่สมบูรณ์");
         }
     }
 
@@ -87,6 +90,24 @@ public class ExaminationController {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    public void alert(String message) {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AlertPopup.fxml"));
+        try {
+            stage.initOwner(examinationPane.getScene().getWindow());
+            stage.setScene(new Scene((Parent) loader.load()));
+            stage.setTitle("Alert!");
+            stage.initModality(Modality.WINDOW_MODAL);
+
+            AlertController controller = loader.getController();
+            controller.setStage(stage);
+            controller.getPopupLabel().setText(message);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

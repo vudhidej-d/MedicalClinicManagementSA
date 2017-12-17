@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" prefHeight="500.0" prefWidth="650.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExaminationResultFERPController">
+<GridPane alignment="center" hgap="10" prefHeight="500.0" prefWidth="650.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExaminationResultFERPController">
    <children>
       <Pane prefHeight="500.0" prefWidth="650.0">
          <children>
@@ -51,7 +51,7 @@
                   <Font name="System Italic" size="32.0" />
                </font>
             </Label>
-            <Label fx:id="resultIDLabel" layoutX="317.0" layoutY="62.0" prefHeight="40.0" prefWidth="100.0">
+            <Label fx:id="resultIDLabel" layoutX="317.0" layoutY="62.0" prefHeight="40.0" prefWidth="100.0" text="*000*">
                <font>
                   <Font name="System Italic" size="32.0" />
                </font>

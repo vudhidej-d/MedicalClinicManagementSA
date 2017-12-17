@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import models.Patient;
@@ -23,10 +24,6 @@ public class SymptomController {
 
     @FXML
     private Pane symtomPane;
-    @FXML
-    private Button cancelBtn;
-    @FXML
-    private Button submitBtn;
     @FXML
     private DatePicker datePicker;
     @FXML
@@ -70,6 +67,8 @@ public class SymptomController {
             db.updateStatus(roomField.getText(), patient.getPatientID());
             patient.addSymptom(symptom);
             changeScene("/MedicalRecordsPage.fxml", 1000, 800);
+        } else {
+            alert("ข้อมูลไม่สมบูรณ์");
         }
     }
 
@@ -106,6 +105,24 @@ public class SymptomController {
         try {
             stage.setScene(new Scene((Parent) loader.load(),w, h));
             stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void alert(String message) {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AlertPopup.fxml"));
+        try {
+            stage.initOwner(symtomPane.getScene().getWindow());
+            stage.setScene(new Scene((Parent) loader.load()));
+            stage.setTitle("Alert!");
+            stage.initModality(Modality.WINDOW_MODAL);
+
+            AlertController controller = loader.getController();
+            controller.setStage(stage);
+            controller.getPopupLabel().setText(message);
+            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }

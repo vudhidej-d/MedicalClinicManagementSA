@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Patient;
 
@@ -43,6 +44,7 @@ public class ExaminationResultFDPController {
     @FXML
     public void completeBtnHandle() {
         db.updateStatus("STANDBY",patient.getPatientID());
+        alert("การตรวจเสร็จสิ้น");
         changeScene("/DispensaryPage.fxml", 1000, 800);
     }
 
@@ -56,6 +58,24 @@ public class ExaminationResultFDPController {
         try {
             stage.setScene(new Scene((Parent) loader.load(),w, h));
             stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void alert(String message) {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AlertPopup.fxml"));
+        try {
+            stage.initOwner(examinationResultPane.getScene().getWindow());
+            stage.setScene(new Scene((Parent) loader.load()));
+            stage.setTitle("Alert!");
+            stage.initModality(Modality.WINDOW_MODAL);
+
+            AlertController controller = loader.getController();
+            controller.setStage(stage);
+            controller.getPopupLabel().setText(message);
+            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }

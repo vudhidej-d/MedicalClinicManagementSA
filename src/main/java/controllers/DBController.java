@@ -110,7 +110,7 @@ public class DBController {
                     String nationality = resultSet.getString(9);
                     String religion = resultSet.getString(10);
                     String telNumber = resultSet.getString(11);
-                    String[] intolerances = resultSet.getString(12).split("\\n");
+                    String[] intolerances = resultSet.getString(12).split("\\\\n");
                     patientRecords.add(new Patient(patientID, nationalID, firstName, lastName, sex, dateOfBirth,
                             age, bloodGroup, nationality, religion, telNumber, intolerances));
                 }
